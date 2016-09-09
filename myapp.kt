@@ -29,4 +29,26 @@ fun main(args: Array<String>) {
     else -> println("Other")
   }
   println(result2)
+
+  /* null-safety */
+  // val foo: String = null // コンパイルエラー
+  var bar: String? = null
+  bar = "null-safety"
+  // bar.length // nullの可能性があるためコンパイルエラー
+  if (bar != null) {
+    bar.length // OK
+  }
+
+  /* 拡張関数 */
+  // Intクラスに関数を追加可能
+  fun Int.odd() = this % 2 != 0
+
+  /* 関数リテラル */
+  val seyHello = {
+    (name: String) ->
+    println("Hello, $name")
+  }
+
+  sayHello("Taro")
+
 }
