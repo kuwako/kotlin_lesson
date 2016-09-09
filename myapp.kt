@@ -35,20 +35,38 @@ fun main(args: Array<String>) {
   var bar: String? = null
   bar = "null-safety"
   // bar.length // nullの可能性があるためコンパイルエラー
+
+  // 条件によるnullチェック
   if (bar != null) {
-    bar.length // OK
+    bar.length // OK、ただしvalで宣言したもののみ。varはnullが代入される可能性があるから
   }
+
+  // 安全呼び出し
+  val b : String? = null
+  println("安全呼び出し")
+  println(b?.length)
+
+  // !!演算子 でnull許可型を非許可に変換して返す
+  val foo2 : String? = "1234"
+  val bar2 : String  = foo2!!
+  println(bar2.length)   // 4
+  println(foo2!!.length) // 4
+
+  /*val baz : String? = null*/
+  /*println(baz!!.size) // throw NPE*/
+
 
   /* 拡張関数 */
   // Intクラスに関数を追加可能
   fun Int.odd() = this % 2 != 0
 
-  /* 関数リテラル */
-  val seyHello = {
-    (name: String) ->
-    println("Hello, $name")
+  val aaa = "aaa"
+  /* パターンマッチング */
+  if(aaa is String) {
+    println("aaa is String")
   }
 
-  sayHello("Taro")
-
+  /* レンジ */
+  println(4 in 1..10) // true
+  println('k' in 'A'..'Z') // false
 }
